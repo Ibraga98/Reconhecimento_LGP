@@ -1,11 +1,20 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import json
 from tensorflow.keras.models import load_model
 
 # Carrega o modelo treinado
 modelo = load_model("modelo_gestos_lgp.h5")
-gestos = ["nao", "ola", "sim"]
+
+# Carregar gestos do arquivo classes.json
+with open("classes.json", "r") as f:
+    class_indices = json.load(f)
+
+# Criar lista ordenada de gestos
+gestos = [None] * len(class_indices)
+for classe, idx in class_indices.items():
+    gestos[idx] = classe
 
 # Inicializa o MediaPipe
 mp_maos = mp.solutions.hands

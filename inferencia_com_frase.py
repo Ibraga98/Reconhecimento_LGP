@@ -3,6 +3,7 @@ import numpy as np
 import mediapipe as mp
 import tensorflow as tf
 import time
+import json
 
 # Carregar o modelo TFLite
 interpreter = tf.lite.Interpreter(model_path="modelo_gestos_lgp.tflite")
@@ -17,8 +18,14 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.7)
 mp_draw = mp.solutions.drawing_utils
 
-# Gestos mapeados
-gestos = ['nao', 'ola', 'sim']
+# Carregar gestos do arquivo classes.json
+with open("classes.json", "r") as f:
+    class_indices = json.load(f)
+
+# Criar lista ordenada de gestos
+gestos = [None] * len(class_indices)
+for classe, idx in class_indices.items():
+    gestos[idx] = classe
 
 # Webcam
 cap = cv2.VideoCapture(0)
