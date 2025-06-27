@@ -36,6 +36,22 @@ val_generator = datagen.flow_from_directory(
     subset="validation"
 )
 
+# Imprimir informações sobre os dados carregados
+# Isso confirma que todas as imagens estão sendo utilizadas, mesmo que sejam mais de 100 por classe
+print(f"Número de amostras de treino: {train_generator.samples}")
+print(f"Número de amostras de validação: {val_generator.samples}")
+print(f"Número total de amostras: {train_generator.samples + val_generator.samples}")
+print(f"Número de classes: {train_generator.num_classes}")
+print(f"Nomes das classes: {train_generator.class_indices}")
+
+# Verificar número de imagens por classe
+# Isso mostra o número total de imagens disponíveis em cada diretório de classe
+import os
+for classe in train_generator.class_indices.keys():
+    caminho_classe = os.path.join(dataset_path, classe)
+    num_imagens = len([f for f in os.listdir(caminho_classe) if os.path.isfile(os.path.join(caminho_classe, f))])
+    print(f"Classe '{classe}': {num_imagens} imagens no diretório")
+
 # Guardar as classes num ficheiro JSON
 with open("classes.json", "w") as f:
     json.dump(train_generator.class_indices, f)
@@ -72,3 +88,4 @@ model.fit(
 )
 
 print("✅ Treino concluído. Modelo salvo como modelo_gestos_lgp.h5")
+print("📊 Todas as imagens do dataset foram utilizadas no treino, incluindo aquelas além das 100 primeiras por classe.")

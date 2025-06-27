@@ -5,7 +5,7 @@ import mediapipe as mp
 import re
 
 # Nome do gesto a capturar
-NOME_GESTO = "por favor"  # ← muda aqui para "nao", "ola", etc.
+NOME_GESTO = "nao"  # ← muda aqui para "nao", "ola", etc.
 NUM_IMAGENS = 100
 IMG_SIZE = 100
 PASTA_DESTINO = f"dataset_limpo/{NOME_GESTO}"
@@ -85,3 +85,8 @@ cv2.destroyAllWindows()
 imagens_capturadas = contador - ultimo_numero
 print(f"✅ Captura finalizada. {imagens_capturadas} novas imagens capturadas nesta sessão.")
 print(f"📊 Total de {contador} imagens disponíveis em {PASTA_DESTINO}")
+
+# Notificar o usuário sobre a necessidade de treinar o modelo
+if imagens_capturadas > 0:
+    print("\n⚠️ IMPORTANTE: Como você capturou novas imagens, é necessário treinar o modelo novamente.")
+    print("🔄 Execute 'python treinar_modelo.py' para atualizar o modelo com as novas imagens.")

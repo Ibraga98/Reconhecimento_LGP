@@ -37,10 +37,16 @@ Este projeto tem como objetivo reconhecer gestos da LGP através de uma webcam, 
 
 ```bash
 python captura_gestos.py           # Captura imagens
-python treinar_modelo.py          # Treina o modelo
+python treinar_modelo.py          # Treina o modelo (necessário após capturar novas imagens)
 python converter_para_tflite.py   # Converte o modelo para .tflite
 python inferencia_tempo_real.py   # Testa em tempo real
 ```
+
+### ⚠️ Fluxo de Trabalho Importante
+
+1. Sempre que novas imagens forem capturadas com `captura_gestos.py`, é **necessário** executar `treinar_modelo.py` novamente para que o modelo aprenda com as novas imagens.
+2. O modelo treinado (`modelo_gestos_lgp.h5`) só reconhecerá gestos que estavam presentes no dataset durante o último treinamento.
+3. Após treinar o modelo, você pode testá-lo com `inferencia_tempo_real.py` ou `testar_modelo.py`.
 
 ---
 
