@@ -21,6 +21,7 @@ O sistema foi treinado para reconhecer os seguintes gestos:
 - **Não**
 - **Por favor**
 - **Bom dia**
+  
 Mais palavras podem ser adicionadas com facilidade através da captura de novos gestos e re-treinamento do modelo.
 
 
