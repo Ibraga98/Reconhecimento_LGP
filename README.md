@@ -19,6 +19,7 @@ O sistema foi treinado para reconhecer os seguintes gestos:
 - **Olá**
 - **Sim**
 - **Não**
+- **Água**
 - **Por favor**
 - **Bom dia**
   
